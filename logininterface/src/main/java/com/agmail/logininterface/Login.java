@@ -19,7 +19,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // 为登录按钮与注册按钮设置监听
+        // 为登录按钮与注册按钮设置监听事件
         Button Login_Button = findViewById(R.id.login_button);
         Button Register_Button = findViewById(R.id.register_button);
         Login_Button.setOnClickListener(this);
@@ -39,8 +39,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             String input_user = user_Text.getText().toString();
             String input_password = password_Text.getText().toString();
 
-            Cursor mycursor = db.rawQuery("SELECT name,password FROM user WHERE name = ? AND password = ?", new String[]{input_user, input_password});
-            //存在数据才返回true
+            Cursor mycursor = db.rawQuery("SELECT name,password FROM user WHERE name = ? AND password = ?",
+                    new String[]{input_user, input_password});
+            // 存在数据才返回true
             if (mycursor.moveToFirst()) {
                 mycursor.close();
                 Intent my_intent = new Intent(Login.this, Weather.class);
@@ -59,13 +60,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             String input_user = user_Text.getText().toString();
             String input_password = password_Text.getText().toString();
 
-            //实例化常量值
+            // 实例化常量值
             ContentValues cValue = new ContentValues();
-            //添加用户名
+            // 添加用户名
             cValue.put("name", input_user);
-            //添加密码
+            // 添加密码
             cValue.put("password", input_password);
-            //调用insert()方法插入数据
+            // 调用insert()方法插入数据
             db.insert("user", null, cValue);
 
         }
